@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,4 +26,11 @@ public class UserEntity {
 
     private LocalDateTime created = LocalDateTime.now();
 
+    @ManyToMany
+    @JoinColumn(name = "users_roles")
+    private Set<RolesEntity> roles = new HashSet<>();
+
+    public void addRole(RolesEntity roleEntity) {
+        roles.add(roleEntity);
+    }
 }
